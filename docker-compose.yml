@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  frontend:
+    image: front-interciclo:latest
+    ports:
+      - "80:80"  # Mapea el puerto 80 del contenedor al puerto 80 del host
+    depends_on:
+      - backend  # Indica que el frontend depende del backend
+
+  backend:
+    image: back-interciclo:latest
+    ports:
+      - "8000:8000"  # Ajusta este puerto según el puerto en el que tu backend esté escuchando
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
